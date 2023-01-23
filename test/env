@@ -1,0 +1,7 @@
+# A basic envfile for testing.
+
+DOTENV_ONE=foo # Inline comment
+DOTENV_TWO="contains # comment char"
+DOTENV_THREE=bar#baz
+
+# vim: ft=sh
