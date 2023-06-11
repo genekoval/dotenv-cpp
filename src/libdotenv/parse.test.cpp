@@ -89,7 +89,10 @@ protected:
         const auto* actual = std::getenv(name);
 
         EXPECT_TRUE(actual);
-        if (actual) EXPECT_EQ(value, std::string_view(actual));
+
+        if (actual) {
+            EXPECT_EQ(value, std::string_view(actual));
+        }
     }
 };
 

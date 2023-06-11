@@ -12,7 +12,7 @@ namespace {
     }
 
     auto trim_start(std::string_view string) -> std::string_view {
-        auto index = 0;
+        std::size_t index = 0;
 
         while (index < string.size() && is_space(string[index])) ++index;
 
