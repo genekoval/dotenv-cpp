@@ -7,9 +7,7 @@
 namespace {
     constexpr auto npos = std::string_view::npos;
 
-    auto is_space(unsigned char c) -> bool {
-        return std::isspace(c);
-    }
+    auto is_space(unsigned char c) -> bool { return std::isspace(c); }
 
     auto trim_start(std::string_view string) -> std::string_view {
         std::size_t index = 0;
@@ -69,15 +67,12 @@ namespace dotenv::detail {
         const auto name = line.substr(0, delim);
         auto value = line.substr(delim + 1);
 
-        if (
-            (value.starts_with('\'') && value.ends_with('\'')) ||
-            (value.starts_with('"') && value.ends_with('"'))
-        ) value = value.substr(1, value.size() - 2);
+        if ((value.starts_with('\'') && value.ends_with('\'')) ||
+            (value.starts_with('"') && value.ends_with('"')))
+            value = value.substr(1, value.size() - 2);
         else {
             const auto comment = value.find(" #");
-            if (comment != npos) {
-                value = trim(value.substr(0, comment));
-            }
+            if (comment != npos) { value = trim(value.substr(0, comment)); }
         }
 
         return {name, value};

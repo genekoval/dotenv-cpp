@@ -7,29 +7,17 @@
 using namespace dotenv::detail;
 using namespace std::literals;
 
-TEST(Trim, Empty) {
-    EXPECT_EQ(""sv, trim(""));
-}
+TEST(Trim, Empty) { EXPECT_EQ(""sv, trim("")); }
 
-TEST(Trim, Whitespace) {
-    EXPECT_EQ(""sv, trim("   "));
-}
+TEST(Trim, Whitespace) { EXPECT_EQ(""sv, trim("   ")); }
 
-TEST(Trim, NoSpaces) {
-    EXPECT_EQ("foo"sv, trim("foo"));
-}
+TEST(Trim, NoSpaces) { EXPECT_EQ("foo"sv, trim("foo")); }
 
-TEST(Trim, Leading) {
-    EXPECT_EQ("foo"sv, trim(" foo"));
-}
+TEST(Trim, Leading) { EXPECT_EQ("foo"sv, trim(" foo")); }
 
-TEST(Trim, Trailing) {
-    EXPECT_EQ("foo"sv, trim("foo "));
-}
+TEST(Trim, Trailing) { EXPECT_EQ("foo"sv, trim("foo ")); }
 
-TEST(Trim, LeadingTrailing) {
-    EXPECT_EQ("foo"sv, trim("   foo   "));
-}
+TEST(Trim, LeadingTrailing) { EXPECT_EQ("foo"sv, trim("   foo   ")); }
 
 TEST(Split, Simple) {
     const auto [name, value] = split("foo=bar");
@@ -79,7 +67,7 @@ protected:
     static constexpr auto var2 = "DOTENV_TWO";
     static constexpr auto var3 = "DOTENV_THREE";
 
-    static constexpr auto vars = std::array { var1, var2, var3 };
+    static constexpr auto vars = std::array {var1, var2, var3};
 
     DotenvTest() {
         for (const auto* var : vars) unset(var);
@@ -90,9 +78,7 @@ protected:
 
         EXPECT_TRUE(actual);
 
-        if (actual) {
-            EXPECT_EQ(value, std::string_view(actual));
-        }
+        if (actual) { EXPECT_EQ(value, std::string_view(actual)); }
     }
 };
 
@@ -149,13 +135,9 @@ TEST_F(Parse, Unset) {
     EXPECT_FALSE(std::getenv(var1));
 }
 
-TEST_F(Parse, EmptySetFails) {
-    EXPECT_THROW(parse("=foo"), dotenv::error);
-}
+TEST_F(Parse, EmptySetFails) { EXPECT_THROW(parse("=foo"), dotenv::error); }
 
-TEST_F(Parse, EmptyUnsetFails) {
-    EXPECT_THROW(parse("="), dotenv::error);
-}
+TEST_F(Parse, EmptyUnsetFails) { EXPECT_THROW(parse("="), dotenv::error); }
 
 using Load = DotenvTest;
 
